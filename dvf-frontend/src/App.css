@@ -1,0 +1,12 @@
+.leaflet-container {
+    height: 300px;
+    width: 480px;
+    margin: auto;
+    margin-top: 15px;
+}
+
+@media screen and (max-width: 500px) {
+    .leaflet-container {
+        width: calc(100% - 30px);
+    }   
+}

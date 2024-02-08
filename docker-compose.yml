@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./dvf-backend
+    volumes:
+      - ./dvf-backend/doc:/app/doc
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./DVF-front/dvf 
+    ports:
+      - "5173:5173"
+  minio:
+    image: minio/minio:latest
+    volumes:
+      - "minio:/data/minio"
+    ports:
+      - "9000:9000"
+      - "8900:8900"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: "minio server /data/minio --console-address ':8900'"
+
+volumes:
+  minio:
+    driver: local
