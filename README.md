@@ -11,6 +11,8 @@ Elle se base sur un ensemble de données contenant actuellement 1 532 718 entré
 
 ## Installation
 
+Assurez vous d'avoir lancer votre système docker (par exemple : docker desktop).
+
 ```bash
 git clone https://github.com/Bertrand2808/DVFApplication.git
 # Assurez vous de vous trouver dans le dépôt cloné
