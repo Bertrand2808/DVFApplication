@@ -13,6 +13,9 @@ RUN mvn dependency:go-offline
 # Copier le code source dans le conteneur
 COPY src ./src
 
+# Copier le dossier doc dans le conteneur (s'il existe)
+COPY doc ./doc
+
 # Compiler l'application
 RUN mvn clean install
 
