@@ -1,11 +1,29 @@
-# Utiliser une image de base officielle Java 17
+# Étape 1 : Utiliser une image de base officielle Maven pour construire l'application
+FROM maven:3.8.4-openjdk-17 AS builder
+
+# Définir le répertoire de travail dans le conteneur
+WORKDIR /app
+
+# Copier le fichier pom.xml dans le conteneur
+COPY pom.xml .
+
+# Télécharger toutes les dépendances et les stocker dans le cache Docker
+RUN mvn dependency:go-offline
+
+# Copier le code source dans le conteneur
+COPY src ./src
+
+# Compiler l'application
+RUN mvn clean install
+
+# Étape 2 : Utiliser une image de base officielle Java 17 pour l'image finale
 FROM openjdk:17-jdk-alpine
 
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app
 
-# Copier le fichier .jar compilé dans l'image
-COPY target/spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar app.jar
+# Copier le fichier .jar compilé depuis l'étape précédente
+COPY --from=builder /app/target/spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar app.jar
 
 # Exécuter l'application
 CMD ["java", "-jar", "app.jar"]
