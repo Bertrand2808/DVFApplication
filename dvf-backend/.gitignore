@@ -45,5 +45,4 @@ src/main/resources/parcelles.csv
 testdb.mv.db
 testdb.trace.db
 
-/doc/full.csv
 /src/main/resources/rapport*
