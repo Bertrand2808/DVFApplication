@@ -25,11 +25,8 @@ FROM openjdk:17-jdk-alpine
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app
 
-# Télécharger le fichier CSV compressé depuis l'URL spécifiée
-RUN wget -O doc/full.csv.gz https://files.data.gouv.fr/geo-dvf/latest/csv/2023/full.csv.gz
-
 # Décompresser le fichier CSV
-RUN gunzip doc/full.csv.gz
+RUN gunzip /app/doc/full.csv.gz
 
 # Copier le fichier .jar compilé depuis l'étape précédente
 COPY --from=builder /app/target/spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar app.jar
