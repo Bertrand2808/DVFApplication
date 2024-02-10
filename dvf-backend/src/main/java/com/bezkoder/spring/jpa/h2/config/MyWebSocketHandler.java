@@ -15,10 +15,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class MyWebSocketHandler extends TextWebSocketHandler {
 
     @Getter
+    private static String lastReceivedMessage;
+
+    @Getter
     private static final List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        System.out.println("WebSocket connection established 11111" );
         sessions.add(session);
     }
 
@@ -28,9 +32,8 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
     }
 
     @Override
-    protected void handleTextMessage(WebSocketSession session, TextMessage message) {
-        // This method is intentionally left empty.
-        // In this application, we do not need to handle incoming WebSocket messages.
+    public void handleTextMessage(WebSocketSession session, TextMessage message) {
+        lastReceivedMessage = message.getPayload();
     }
 
     public void sendPdfGeneratedNotification(String base64Pdf) {
