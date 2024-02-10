@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api")
-public class RechercheController {
-    private final Logger logger = Logger.getLogger(RechercheController.class.getName());
+public class RechercheTransactionsRestController {
+    private final Logger logger = Logger.getLogger(RechercheTransactionsRestController.class.getName());
     private final JmsMessageSender jmsMessageSender;
 
     /**
