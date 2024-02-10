@@ -28,23 +28,30 @@ public class RechercheTransactionsRestController {
      * @return the ResponseEntity with status 200 (OK) and the list of transactions in body
      */
     @Operation(summary = "Retrieve transactions based on latitude, longitude, and radius", tags = { "transactions"},
-    responses = {
-        @ApiResponse(responseCode = "200", description = "Transactions found", content = {@Content(mediaType = "application/json") }),
-        @ApiResponse(responseCode = "400", description = "Bad request", content = {@Content(mediaType = "application/json") }),
-        @ApiResponse(responseCode = "500", description = "Internal server error", content = {@Content(mediaType = "application/json") })
-    })
-    @GetMapping ("/transactions")
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Transactions found", content = {@Content(mediaType = "application/json") }),
+                    @ApiResponse(responseCode = "400", description = "Bad request", content = {@Content(mediaType = "application/json") }),
+                    @ApiResponse(responseCode = "500", description = "Internal server error", content = {@Content(mediaType = "application/json") })
+            })
+    @GetMapping("/transactions")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> rechercherTransaction(
-            @RequestParam(name = "latitude") Double latitude,
-            @RequestParam(name = "longitude") Double longitude,
-            @RequestParam(name = "rayon") Double rayon ) {
+            @RequestParam(name = "latitude", required = false) Double latitude,
+            @RequestParam(name = "longitude", required = false) Double longitude,
+            @RequestParam(name = "rayon", required = false) Double rayon) {
+        System.out.println(latitude == null || longitude == null || rayon == null);
+        System.out.println(latitude);
+        System.out.println(longitude);
+        System.out.println(rayon);
         if (latitude == null || longitude == null || rayon == null) {
-            throw new ParametresManquantsException("Les paramètres latitude, longitude et rayon sont obligatoires.");
+            String errorMessage = "Les paramètres latitude, longitude et rayon sont obligatoires.";
+            return ResponseEntity.badRequest().body(errorMessage);
         }
+
         if (logger.isLoggable(Level.INFO)) {
             logger.info(MessageFormat.format("Recherche de transactions avec latitude : {0}, longitude : {1}, rayon : {2}", latitude, longitude, rayon));
         }
+
         String fileName = "rapport_" + System.currentTimeMillis() + ".pdf";
         String path = "src/main/resources/" + fileName;
         String message = "Générer PDF pour Latitude : " + latitude + ", Longitude : " + longitude + ", Rayon : " + rayon + ", path : " + path;
