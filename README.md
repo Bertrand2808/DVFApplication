@@ -16,6 +16,10 @@ Assurez vous d'avoir lancer votre système docker (par exemple : docker desktop)
 ```bash
 git clone https://github.com/Bertrand2808/DVFApplication.git
 # Assurez vous de vous trouver dans le dépôt cloné où se trouve le docker-compose.yml
+cd DVFApplication/dvf-backend/doc/
+gunzip full.csv.gz # Dézipper le fichier full.csv
+cd ..
+cd .. # revenir dans le dossier DVFApplication
 docker-compose up --build # Lancer le docker
 ```
 
