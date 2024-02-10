@@ -29,7 +29,6 @@ class SpringBootJpaH2ApplicationTests {
 	@Mock
 	private MyWebSocketHandler myWebSocketHandler;
 
-	@Test
 	@Order(1)
 	public void shouldImportFileSuccessfully() throws Exception {
 		assertNotNull(ImportationService);
