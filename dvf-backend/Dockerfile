@@ -22,6 +22,9 @@ FROM openjdk:17-jdk-alpine
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app
 
+# Créer le répertoire doc
+RUN mkdir -p /app/doc
+
 # Télécharger le fichier CSV compressé depuis l'URL spécifiée
 RUN wget -O /app/doc/full.csv.gz https://files.data.gouv.fr/geo-dvf/latest/csv/2023/full.csv.gz
 
