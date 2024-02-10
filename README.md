@@ -11,9 +11,11 @@ Elle se base sur un ensemble de données contenant actuellement 1 532 718 entré
 
 ## Installation
 
+Assurez vous d'avoir lancer votre système docker (par exemple : docker desktop).
+
 ```bash
 git clone https://github.com/Bertrand2808/DVFApplication.git
-# Assurez vous de vous trouver dans le dépôt cloné
+# Assurez vous de vous trouver dans le dépôt cloné où se trouve le docker-compose.yml
 docker-compose up --build # Lancer le docker
 ```
 
@@ -59,6 +61,12 @@ Vous pourrez à tout moment consulter les anciens commits et merges pour voir l'
 - Back : https://github.com/Bertrand2808/dvf-backend
 - Trello : https://trello.com/b/ogpwtTqw/projet-dvf
 
+## Documentation
+
+Vous pourrez retrouver les différents diagrammes StarUml demandé dans le dossier `doc` à la racine du projet `dvf-backend`.
+Une fois ouvert avec StarUml, vous pouvez les retrouver dans la barre de recherche :
+
+![alt text](image-5.png)
 ## Authors
 -Aurélien (https://github.com/nandreau)
 

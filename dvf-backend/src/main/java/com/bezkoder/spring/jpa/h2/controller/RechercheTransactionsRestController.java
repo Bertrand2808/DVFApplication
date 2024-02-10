@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api")
-public class RechercheController {
-    private final Logger logger = Logger.getLogger(RechercheController.class.getName());
+public class RechercheTransactionsRestController {
+    private final Logger logger = Logger.getLogger(RechercheTransactionsRestController.class.getName());
     private final JmsMessageSender jmsMessageSender;
 
     /**
@@ -28,18 +28,21 @@ public class RechercheController {
      * @return the ResponseEntity with status 200 (OK) and the list of transactions in body
      */
     @Operation(summary = "Retrieve transactions based on latitude, longitude, and radius", tags = { "transactions"},
-    responses = {
-        @ApiResponse(responseCode = "200", description = "Transactions found", content = {@Content(mediaType = "application/json") }),
-        @ApiResponse(responseCode = "400", description = "Bad request", content = {@Content(mediaType = "application/json") }),
-        @ApiResponse(responseCode = "500", description = "Internal server error", content = {@Content(mediaType = "application/json") })
-    })
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Transactions found", content = {@Content(mediaType = "application/json") }),
+                    @ApiResponse(responseCode = "400", description = "Bad request", content = {@Content(mediaType = "application/json") }),
+                    @ApiResponse(responseCode = "500", description = "Internal server error", content = {@Content(mediaType = "application/json") })
+            })
     @GetMapping("/transactions")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> rechercherTransaction(
             @RequestParam(name = "latitude", required = false) Double latitude,
             @RequestParam(name = "longitude", required = false) Double longitude,
             @RequestParam(name = "rayon", required = false) Double rayon) {
-
+        System.out.println(latitude == null || longitude == null || rayon == null);
+        System.out.println(latitude);
+        System.out.println(longitude);
+        System.out.println(rayon);
         if (latitude == null || longitude == null || rayon == null) {
             String errorMessage = "Les paramètres latitude, longitude et rayon sont obligatoires.";
             return ResponseEntity.badRequest().body(errorMessage);

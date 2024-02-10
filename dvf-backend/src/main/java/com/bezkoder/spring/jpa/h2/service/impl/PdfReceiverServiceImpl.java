@@ -1,25 +1,34 @@
-package com.bezkoder.spring.jpa.h2.service;
+package com.bezkoder.spring.jpa.h2.service.impl;
 
 import com.bezkoder.spring.jpa.h2.config.MyWebSocketHandler;
 import com.bezkoder.spring.jpa.h2.exception.ValueExtractionException;
+import com.bezkoder.spring.jpa.h2.service.PdfGenerateurService;
+import com.bezkoder.spring.jpa.h2.service.PdfReceiverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Component
-public class PdfReceiver {
-    private final Logger logger = Logger.getLogger(PdfReceiver.class.getName());
+@Service
+public class PdfReceiverServiceImpl implements PdfReceiverService {
+    private final Logger logger = Logger.getLogger(PdfReceiverServiceImpl.class.getName());
     private final PdfGenerateurService pdfGenerateurService;
+
     @Autowired
-    public PdfReceiver(PdfGenerateurService pdfGenerateurService, MyWebSocketHandler myWebSocketHandler) {
+    public PdfReceiverServiceImpl(PdfGenerateurService pdfGenerateurService, MyWebSocketHandler myWebSocketHandler) {
         this.pdfGenerateurService = pdfGenerateurService;
     }
+
     /**
-     * Méthode pour recevoir les messages de la file pdfQueue
-     * @param message
+     * Reçoit un message contenant des informations pour générer un PDF.
+     *
+     * @param message le message
      */
+    @Override
     @JmsListener(destination = "pdfQueue", containerFactory = "myFactory")
     public void receivePdf(String message) {
         if(logger.isLoggable(Level.INFO)) {
@@ -39,10 +48,12 @@ public class PdfReceiver {
     }
 
     /**
-     * Méthode pour extraire la valeur d'un attribut dans un message
-     * @param message
-     * @param key
-     * @return
+     * Extrait la valeur associée à une clé dans un message.
+     *
+     * @param message le message
+     * @param key la clé
+     * @return la valeur associée à la clé
+     * @throws ValueExtractionException si la valeur ne peut pas être extraite
      */
     private double extractValue(String message, String key) {
         String startTag = key + " : ";
@@ -60,6 +71,4 @@ public class PdfReceiver {
         }
         return 0.0;
     }
-
-
 }
