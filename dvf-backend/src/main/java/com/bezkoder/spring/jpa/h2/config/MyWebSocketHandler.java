@@ -2,6 +2,8 @@ package com.bezkoder.spring.jpa.h2.config;
 
 import com.bezkoder.spring.jpa.h2.exception.WebSocketNotificationException;
 import lombok.Getter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -14,15 +16,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Component
 public class MyWebSocketHandler extends TextWebSocketHandler {
 
+    Logger logger = LoggerFactory.getLogger(MyWebSocketHandler.class);
     @Getter
-    private static String lastReceivedMessage;
+    private String lastReceivedMessage;
 
     @Getter
     private static final List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        System.out.println("WebSocket connection established 11111" );
+        logger.info("New WebSocket connection established");
         sessions.add(session);
     }
 
