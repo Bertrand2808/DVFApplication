@@ -61,6 +61,12 @@ Vous pourrez à tout moment consulter les anciens commits et merges pour voir l'
 - Back : https://github.com/Bertrand2808/dvf-backend
 - Trello : https://trello.com/b/ogpwtTqw/projet-dvf
 
+## Documentation
+
+Vous pourrez retrouver les différents diagrammes StarUml demandé dans le dossier `doc` à la racine du projet `dvf-backend`.
+Une fois ouvert avec StarUml, vous pouvez les retrouver dans la barre de recherche :
+
+![alt text](image-5.png)
 ## Authors
 -Aurélien (https://github.com/nandreau)
 
