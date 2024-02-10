@@ -2,6 +2,7 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { HomeModernIcon } from "@heroicons/react/24/outline";
 import logo from "./assets/logo.png";
+import markerPng from "./assets/markerIcon.png";
 import {
   MapContainer,
   TileLayer,
@@ -126,7 +127,7 @@ export default function Formulaire() {
   }
 
   var markerIcon = L.icon({
-    iconUrl: 'dvf/src/assets/markerIcon.png',
+    iconUrl: markerPng,
     iconSize:     [25, 41], // size of the icon
     iconAnchor:   [13, 41], // point of the icon which will correspond to marker's location
   });
