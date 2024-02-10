@@ -15,7 +15,7 @@ Assurez vous d'avoir lancer votre système docker (par exemple : docker desktop)
 
 ```bash
 git clone https://github.com/Bertrand2808/DVFApplication.git
-# Assurez vous de vous trouver dans le dépôt cloné
+# Assurez vous de vous trouver dans le dépôt cloné où se trouve le docker-compose.yml
 docker-compose up --build # Lancer le docker
 ```
 
