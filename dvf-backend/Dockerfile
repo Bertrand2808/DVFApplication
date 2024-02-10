@@ -25,14 +25,11 @@ FROM openjdk:17-jdk-alpine
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app
 
+# Décompresser le fichier CSV
+RUN gunzip /app/doc/full.csv.gz
+
 # Copier le fichier .jar compilé depuis l'étape précédente
 COPY --from=builder /app/target/spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar app.jar
 
-# Copier le script de décompression dans le conteneur
-COPY unzip.sh .
-
-# Rendre le script exécutable
-RUN chmod +x unzip.sh
-
-# Définir le script comme point d'entrée
-ENTRYPOINT ["./unzip.sh"]
+# Exécuter l'application
+CMD ["java", "-jar", "app.jar"]
