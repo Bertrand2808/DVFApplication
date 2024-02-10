@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 public class ImportationServiceImpl implements ImportationService {
 
     private static final int BATCH_SIZE = 100000; // nombre de lignes à importer à la fois
-    private static final int DELAY = 60000; // 5 minutes
+    private static final int DELAY = 300000; // 5 minutes
     private final Logger logger = Logger.getLogger(ImportationServiceImpl.class.getName());
     private final TransactionRepository transactionsRepository;
     @Value("${csvFilePath}")
