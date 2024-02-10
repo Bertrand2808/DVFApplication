@@ -13,8 +13,8 @@ RUN mvn dependency:go-offline
 # Copier le code source dans le conteneur
 COPY src ./src
 
-# Copier le dossier doc dans le conteneur (s'il existe)
-COPY doc ./doc
+# Créer le répertoire doc dans le conteneur
+RUN mkdir -p /app/doc
 
 # Compiler l'application
 RUN mvn clean install
